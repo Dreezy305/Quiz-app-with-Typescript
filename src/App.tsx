@@ -6,17 +6,41 @@ import QuestionCard from "./components/QuestionCard";
 
 const TOTAL_QUESTIONS = 10;
 
+export type AnswerObject = {
+  question: string;
+  answer: string;
+  correct: boolean;
+  correctAnswer: string;
+};
+
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
+  const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY));
+  // console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY));
 
-  const startTrivia = async () => {};
+  const startTrivia = async () => {
+    setLoading(true);
+    setGameOver(false);
+
+    const newQuestion = await fetchQuizQuestions(
+      TOTAL_QUESTIONS,
+      Difficulty.EASY
+    );
+
+    // console.log(newQuestion);
+
+    setQuestions(newQuestion !== undefined ? newQuestion : []);
+
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
+  };
 
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
 
@@ -24,9 +48,13 @@ const App = () => {
   return (
     <div className="App">
       <h1>QUIZ APP</h1>
-      <button className="start" onClick={() => startTrivia()}>
-        start
-      </button>
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        <button className="start" onClick={() => startTrivia()}>
+          start
+        </button>
+      ) : (
+        ""
+      )}
       <p className="score">Score:</p>
       <p className="loading">Loading Questions ...</p>
       {/* <QuestionCard
