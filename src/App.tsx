@@ -30,6 +30,7 @@ const App = () => {
         totalQuestions={TOTAL_QUESTIONS}
         question={questions[number].question}
         answers={questions[number].answers}
+        userAnswer={userAnswers ? userAnswers[number] : undefined}
       />
       <button className="next" onClick={() => nextQuestion()}>
         Next Question
