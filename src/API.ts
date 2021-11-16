@@ -1,3 +1,5 @@
+export type Question = {};
+
 export enum Difficulty {
   EASY = "easy",
   MEDIUM = "medium",
