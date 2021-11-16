@@ -16,7 +16,7 @@ function App() {
       </button>
       <p className="score">Score:</p>
       <p className="loading">Loading Questions ...</p>
-      <QuestionCard />
+      {/* <QuestionCard /> */}
       <button className="next" onClick={() => nextQuestion()}>
         Next Question
       </button>
