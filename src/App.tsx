@@ -42,7 +42,15 @@ const App = () => {
     setLoading(false);
   };
 
-  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!gameOver) {
+      // user answer
+      const answer = e.currentTarget.value;
+      // check answer against correct answer
+      const correct = questions[number].correct_answer === answer;
+      // add score
+    }
+  };
 
   const nextQuestion = () => {};
   return (
