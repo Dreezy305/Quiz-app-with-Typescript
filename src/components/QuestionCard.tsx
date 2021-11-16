@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   question: string;
@@ -17,6 +17,13 @@ const QuestionCard: React.FC<Props> = ({
   questionNr,
   totalQuestions,
 }) => {
+  const [loading, setLoading] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [number, setNumber] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [score, setScore] = userAnswer(0);
+  const [gameOver, setGameOver] = useState(true);
+
   return (
     <div>
       <p className="number">
@@ -26,7 +33,9 @@ const QuestionCard: React.FC<Props> = ({
       <div>
         {answers.map((answer) => (
           <div>
-            <button disabled={userAnswer} onClick={callback}></button>
+            <button disabled={userAnswer} onClick={callback}>
+              <span dangerouslySetInnerHTML={{ __html: answer }} />
+            </button>
           </div>
         ))}
       </div>
