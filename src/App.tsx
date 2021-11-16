@@ -51,12 +51,29 @@ const App = () => {
       // add score if answer is correct
       if (correct) {
         setScore((prev) => prev + 1);
-        // save answer
+        // save answer in the array for answers
+        const AnswerObject = {
+          question: questions[number].question,
+          answer,
+          correct,
+          correctAnswer: questions[number].correct_answer,
+        };
+        setUserAnswers((prev) => [...prev, AnswerObject]);
       }
     }
   };
 
-  const nextQuestion = () => {};
+  const nextQuestion = () => {
+    // move on to next question
+    const nextQuestion = number + 1;
+
+    if (nextQuestion === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQuestion);
+    }
+  };
+
   return (
     <div className="App">
       <h1>QUIZ APP</h1>
