@@ -20,6 +20,7 @@ const App = () => {
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
+  const [msg, setMsg] = useState(false);
 
   // console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY));
 
@@ -69,6 +70,7 @@ const App = () => {
 
     if (nextQuestion === TOTAL_QUESTIONS) {
       setGameOver(true);
+      setMsg(true);
     } else {
       setNumber(nextQuestion);
     }
@@ -108,6 +110,12 @@ const App = () => {
           Next Question
         </button>
       ) : null}
+
+      {msg && (
+        <p className="loading">
+          We've come to the end of the test, kindly await further instructions
+        </p>
+      )}
     </div>
   );
 };
